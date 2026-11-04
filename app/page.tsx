@@ -6,11 +6,15 @@ import { PromiseSection } from '@/components/promise-section'
 import { ReviewsSection } from '@/components/reviews-section'
 import { ContactSection } from '@/components/contact-section'
 import { SiteFooter } from '@/components/site-footer'
+import { getCurrentMember } from '@/lib/supabase/server'
 
-export default function Page() {
+export default async function Page() {
+  // 로그인한 회원이면 이름을, 아니면 null
+  const member = await getCurrentMember()
+
   return (
     <>
-      <SiteHeader />
+      <SiteHeader member={member} />
       <main>
         <HeroSection />
         <StorySection />
